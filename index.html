@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dylan Heyne — Recruiting & Automation Portfolio</title>
+  <meta name="description" content="Senior talent professional and recruiting automation builder. 7+ years at Amazon and Coinbase, building AI-powered systems that compress recruiting workflows.">
+  <style>
+    :root {
+      --teal: #1a8a8a; --teal-light: #e8f5f5; --teal-mid: #2aacac; --teal-dark: #0d6060;
+      --dark: #0f1923; --dark2: #16213e; --dark3: #1a2744;
+      --text: #2d3748; --muted: #718096; --border: #e2e8f0; --bg: #f8fafc; --white: #fff;
+      --green: #38a169; --amber: #d69e2e; --purple: #805ad5; --blue: #3182ce; --red: #e53e3e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(15,25,35,0.95); backdrop-filter: blur(12px);
+      padding: 0 2rem; display: flex; align-items: center; height: 56px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .nav-brand { color: var(--teal-mid); font-weight: 800; font-size: 1rem; margin-right: auto; letter-spacing: -0.02em; }
+    nav a { color: #94a3b8; text-decoration: none; font-size: 0.8rem; padding: 0 0.85rem; height: 56px; display: flex; align-items: center; transition: color 0.15s; white-space: nowrap; }
+    nav a:hover { color: #fff; }
+    .nav-cta { background: var(--teal); color: white !important; border-radius: 6px; padding: 0 1rem !important; margin-left: 0.5rem; font-weight: 600 !important; }
+    .nav-cta:hover { background: var(--teal-mid) !important; }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(160deg, var(--dark) 0%, var(--dark2) 50%, var(--dark3) 100%);
+      min-height: 100vh; padding: 120px 2rem 80px; display: flex; align-items: center;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(26,138,138,0.15) 0%, transparent 70%);
+      top: -100px; right: -100px; pointer-events: none;
+    }
+    .hero::after {
+      content: ''; position: absolute; width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(49,130,206,0.08) 0%, transparent 70%);
+      bottom: 0; left: 20%; pointer-events: none;
+    }
+    .hero-inner { max-width: 1100px; margin: 0 auto; width: 100%; position: relative; z-index: 1; }
+    .hero-eyebrow { font-size: 0.78rem; font-weight: 700; color: var(--teal-mid); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 1rem; }
+    .hero-name { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 800; color: #fff; letter-spacing: -0.03em; line-height: 1.05; }
+    .hero-title { font-size: clamp(1.1rem, 2.5vw, 1.4rem); color: #94a3b8; margin-top: 0.75rem; font-weight: 400; max-width: 620px; line-height: 1.5; }
+    .hero-title strong { color: var(--teal-mid); font-weight: 600; }
+    .hero-links { display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
+    .hero-link { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.6rem 1.2rem; border-radius: 8px; font-size: 0.85rem; font-weight: 600; text-decoration: none; transition: all 0.15s; }
+    .hero-link.primary { background: var(--teal); color: white; }
+    .hero-link.primary:hover { background: var(--teal-mid); transform: translateY(-1px); }
+    .hero-link.secondary { background: rgba(255,255,255,0.08); color: #cbd5e0; border: 1px solid rgba(255,255,255,0.12); }
+    .hero-link.secondary:hover { background: rgba(255,255,255,0.14); color: #fff; }
+
+    /* STATS STRIP */
+    .stats-strip { background: var(--white); border-bottom: 1px solid var(--border); padding: 2rem; }
+    .stats-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0; }
+    .stat-block { padding: 1rem 1.5rem; border-right: 1px solid var(--border); }
+    .stat-block:last-child { border-right: none; }
+    .stat-num { font-size: 2.2rem; font-weight: 800; color: var(--teal); line-height: 1; }
+    .stat-label { font-size: 0.78rem; color: var(--muted); margin-top: 0.3rem; }
+    .stat-context { font-size: 0.72rem; color: #94a3b8; }
+
+    /* GENERIC SECTION */
+    .section { padding: 5rem 2rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-alt { background: var(--white); }
+    .eyebrow { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--teal); margin-bottom: 0.4rem; }
+    .section-title { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; color: var(--dark); margin-bottom: 0.5rem; }
+    .section-sub { font-size: 0.95rem; color: var(--muted); max-width: 600px; margin-bottom: 2.5rem; line-height: 1.6; }
+
+    /* SYSTEMS */
+    .systems-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media(max-width:720px){ .systems-grid { grid-template-columns: 1fr; } }
+    .sys-card {
+      background: var(--bg); border: 1px solid var(--border); border-radius: 14px;
+      padding: 1.75rem; position: relative; overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .sys-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); }
+    .sys-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--teal); border-radius: 14px 14px 0 0; }
+    .sys-card.amber::before { background: var(--amber); }
+    .sys-card.purple::before { background: var(--purple); }
+    .sys-card.blue::before { background: var(--blue); }
+    .sys-name { font-size: 1.05rem; font-weight: 700; color: var(--dark); margin-bottom: 0.2rem; }
+    .sys-desc { font-size: 0.84rem; color: var(--muted); margin-bottom: 1rem; }
+    .svg-wrap { background: var(--white); border-radius: 8px; padding: 0.6rem; margin-bottom: 1rem; border: 1px solid var(--border); }
+    .svg-wrap svg { display: block; width: 100%; height: auto; }
+    .before-after {
+      display: flex; align-items: center; gap: 0.6rem;
+      background: var(--white); border: 1px solid var(--border); border-radius: 8px;
+      padding: 0.6rem 0.9rem; margin-bottom: 1rem; font-size: 0.82rem;
+    }
+    .ba-before { color: var(--muted); text-decoration: line-through; }
+    .ba-arrow { color: var(--teal); font-weight: 700; }
+    .ba-after { font-weight: 700; color: var(--green); }
+    .sys-chips { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .chip { background: var(--white); border: 1px solid var(--border); font-size: 0.7rem; font-weight: 600; padding: 0.2rem 0.5rem; border-radius: 4px; color: var(--text); }
+
+    /* METRICS */
+    .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    @media(max-width:680px){ .metrics-grid { grid-template-columns: 1fr; } }
+    .metric-chart-area { display: flex; flex-direction: column; gap: 1.5rem; }
+    .metric-row { }
+    .metric-row-label { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.4rem; }
+    .metric-row-label .mlabel { font-size: 0.82rem; font-weight: 600; color: var(--text); }
+    .metric-row-label .mvalue { font-size: 1rem; font-weight: 800; color: var(--teal); }
+    .bar-track { background: var(--border); border-radius: 4px; height: 10px; overflow: hidden; }
+    .bar-fill-anim { height: 100%; border-radius: 4px; width: 0; transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1); }
+    .bar-fill-anim.teal { background: var(--teal); }
+    .bar-fill-anim.green { background: var(--green); }
+    .bar-fill-anim.purple { background: var(--purple); }
+    .bar-fill-anim.amber { background: var(--amber); }
+    .bar-benchmark { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--muted); margin-top: 0.25rem; }
+    .metrics-context h3 { font-size: 1.15rem; font-weight: 700; color: var(--dark); margin-bottom: 0.75rem; }
+    .metrics-context p { font-size: 0.9rem; color: var(--muted); line-height: 1.7; margin-bottom: 1rem; }
+    .metrics-context p:last-child { margin-bottom: 0; }
+
+    /* CAREER TIMELINE */
+    .career-timeline { display: flex; flex-direction: column; gap: 0; }
+    .ct-item { display: grid; grid-template-columns: 180px 32px 1fr; gap: 0; align-items: start; }
+    .ct-item + .ct-item { margin-top: 0; }
+    .ct-meta { text-align: right; padding-right: 20px; padding-top: 2px; }
+    .ct-years { font-size: 0.78rem; color: var(--muted); font-weight: 600; }
+    .ct-co { font-size: 0.72rem; color: var(--teal); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+    .ct-spine { display: flex; flex-direction: column; align-items: center; }
+    .ct-dot { width: 14px; height: 14px; border-radius: 50%; border: 2.5px solid var(--white); box-shadow: 0 0 0 2px var(--teal); background: var(--teal); flex-shrink: 0; margin-top: 4px; }
+    .ct-dot.amazon { background: #f97316; box-shadow: 0 0 0 2px #f97316; }
+    .ct-dot.coinbase { background: var(--blue); box-shadow: 0 0 0 2px var(--blue); }
+    .ct-dot.now { background: var(--teal-mid); box-shadow: 0 0 0 2.5px var(--teal-mid), 0 0 0 5px rgba(42,172,172,0.2); }
+    .ct-line { flex: 1; width: 2px; background: var(--border); margin: 4px 0; min-height: 20px; }
+    .ct-body { padding: 0 0 2rem 20px; }
+    .ct-role { font-size: 0.95rem; font-weight: 700; color: var(--dark); }
+    .ct-points { list-style: none; margin-top: 0.4rem; }
+    .ct-points li { font-size: 0.83rem; color: var(--muted); padding: 0.1rem 0 0.1rem 1rem; position: relative; }
+    .ct-points li::before { content: '·'; position: absolute; left: 0; color: var(--teal); font-size: 1rem; line-height: 1; }
+    .ct-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.5rem; }
+    .ct-tag { font-size: 0.68rem; font-weight: 700; padding: 0.12rem 0.4rem; border-radius: 3px; background: var(--teal-light); color: var(--teal); text-transform: uppercase; letter-spacing: 0.04em; }
+    .ct-tag.orange { background: #fff7ed; color: #9a3412; }
+    .ct-tag.blue { background: #eff6ff; color: #1e40af; }
+    @media(max-width:620px){
+      .ct-item { grid-template-columns: 100px 28px 1fr; }
+      .ct-years { font-size: 0.7rem; }
+    }
+
+    /* STACK */
+    .stack-groups { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem; }
+    .stack-group h3 { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 0.75rem; }
+    .stack-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .stack-pill { font-size: 0.8rem; font-weight: 600; padding: 0.3rem 0.7rem; border-radius: 6px; }
+    .stack-pill.teal { background: var(--teal-light); color: var(--teal-dark); }
+    .stack-pill.purple { background: #faf5ff; color: #44337a; }
+    .stack-pill.amber { background: #fffbeb; color: #744210; }
+    .stack-pill.blue { background: #eff6ff; color: #1e40af; }
+    .stack-pill.green { background: #f0fff4; color: #22543d; }
+    .stack-pill.gray { background: #f1f5f9; color: #475569; }
+
+    /* CURRENTLY BUILDING */
+    .building-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.2rem; }
+    .build-card {
+      background: var(--dark); border-radius: 12px; padding: 1.4rem;
+      border: 1px solid rgba(255,255,255,0.08); position: relative; overflow: hidden;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .build-card:hover { transform: translateY(-2px); border-color: rgba(42,172,172,0.3); }
+    .build-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--teal); }
+    .build-card.amber::before { background: var(--amber); }
+    .build-card.purple::before { background: var(--purple); }
+    .build-name { font-size: 0.95rem; font-weight: 700; color: #f1f5f9; margin-bottom: 0.3rem; }
+    .build-desc { font-size: 0.82rem; color: #94a3b8; margin-bottom: 0.9rem; line-height: 1.5; }
+    .build-stack { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 0.75rem; }
+    .build-chip { background: rgba(255,255,255,0.08); color: #94a3b8; font-size: 0.68rem; font-weight: 600; padding: 0.18rem 0.4rem; border-radius: 3px; }
+    .build-status { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.72rem; font-weight: 700; color: var(--teal-mid); }
+
+    /* PROGRAMS */
+    .programs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+    .prog-card { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem; }
+    .prog-card h3 { font-size: 0.92rem; font-weight: 700; margin-bottom: 0.2rem; }
+    .prog-role { font-size: 0.75rem; color: var(--teal); font-weight: 600; margin-bottom: 0.45rem; }
+    .prog-desc { font-size: 0.82rem; color: var(--muted); margin-bottom: 0.6rem; line-height: 1.55; }
+    .prog-pill { display: inline-block; background: var(--teal-light); color: var(--teal); font-size: 0.7rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 4px; margin-right: 0.3rem; margin-bottom: 0.3rem; }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark); color: #94a3b8; text-align: center; padding: 3rem 2rem;
+    }
+    footer .f-name { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 0.5rem; }
+    footer .f-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 1rem; }
+    footer .f-links a { color: var(--teal-mid); text-decoration: none; font-size: 0.85rem; font-weight: 600; }
+    footer .f-links a:hover { color: #fff; }
+    footer p { font-size: 0.8rem; margin-top: 1.5rem; }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { opacity: 0; animation: fadeUp 0.6s ease forwards; }
+    .fade-up:nth-child(1) { animation-delay: 0.1s; }
+    .fade-up:nth-child(2) { animation-delay: 0.25s; }
+    .fade-up:nth-child(3) { animation-delay: 0.4s; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-brand">Dylan Heyne</span>
+  <a href="#systems">Systems</a>
+  <a href="#track-record">Track Record</a>
+  <a href="#programs">Programs</a>
+  <a href="#career">Career</a>
+  <a href="#stack">Stack</a>
+  <a href="#building">Building</a>
+  <a href="mailto:dylan.d.heyne@gmail.com" class="nav-cta">Get in touch</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow fade-up">Senior Talent Professional &amp; Recruiting Automation Builder</div>
+    <div class="hero-name fade-up">Dylan Heyne</div>
+    <div class="hero-title fade-up">
+      7+ years at Amazon and Coinbase owning <strong>technically complex searches</strong> at the VP/C-suite level —
+      and building the <strong>AI-powered systems</strong> that make recruiting faster, more accurate, and more scalable.
+    </div>
+    <div class="hero-links fade-up">
+      <a href="mailto:dylan.d.heyne@gmail.com" class="hero-link primary">📩 dylan.d.heyne@gmail.com</a>
+      <a href="https://linkedin.com/in/dylanheyne" class="hero-link secondary" target="_blank">LinkedIn</a>
+      <a href="#systems" class="hero-link secondary">See the work ↓</a>
+    </div>
+  </div>
+</div>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-block">
+      <div class="stat-num"><span class="counter" data-target="45" data-suffix="">0</span></div>
+      <div class="stat-label">Avg hires / year</div>
+      <div class="stat-context">vs. 30 benchmark</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-num"><span class="counter" data-target="87" data-suffix="%">0%</span></div>
+      <div class="stat-label">Offer acceptance rate</div>
+      <div class="stat-context">across 2 years at Coinbase</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-num"><span class="counter" data-target="100" data-suffix="%">0%</span></div>
+      <div class="stat-label">COO / ET-1 approval</div>
+      <div class="stat-context">70+ offers reviewed</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-num"><span class="counter" data-target="55" data-suffix="%">0%</span></div>
+      <div class="stat-label">Proactively sourced</div>
+      <div class="stat-context">of all hires placed</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-num"><span class="counter" data-target="4000" data-suffix="+">0+</span></div>
+      <div class="stat-label">Hours saved</div>
+      <div class="stat-context">BR experiment · Amazon</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-num"><span class="counter" data-target="7" data-suffix="+">0+</span></div>
+      <div class="stat-label">Years in technical recruiting</div>
+      <div class="stat-context">Amazon + Coinbase</div>
+    </div>
+  </div>
+</div>
+
+<!-- SYSTEMS -->
+<div class="section" id="systems">
+  <div class="section-inner">
+    <div class="eyebrow">What I Build</div>
+    <div class="section-title">Automation Systems</div>
+    <div class="section-sub">Built end-to-end recruiting automation at Coinbase with no ATS API access, no engineering resources, and no dedicated budget — while maintaining above-benchmark hiring output.</div>
+    <div class="systems-grid">
+
+      <div class="sys-card">
+        <div class="sys-name">Recruiter Hub</div>
+        <div class="sys-desc">4-tab React app that replaced hours of manual prep, reporting, and resume review with an AI-powered command center.</div>
+        <div class="svg-wrap">
+          <svg viewBox="0 0 436 72" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="rh1" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0,0 6,3 0,6" fill="#1a8a8a"/></marker></defs>
+            <rect x="4" y="22" width="80" height="26" rx="5" fill="#e8f5f5" stroke="#1a8a8a" stroke-width="1.5"/>
+            <text x="44" y="38" text-anchor="middle" font-size="10" fill="#0d5f5f" font-family="system-ui,sans-serif">GH Report</text>
+            <line x1="84" y1="35" x2="95" y2="35" stroke="#1a8a8a" stroke-width="1.5" marker-end="url(#rh1)"/>
+            <rect x="96" y="22" width="82" height="26" rx="5" fill="#e8f5f5" stroke="#1a8a8a" stroke-width="1.5"/>
+            <text x="137" y="38" text-anchor="middle" font-size="10" fill="#0d5f5f" font-family="system-ui,sans-serif">n8n webhook</text>
+            <line x1="178" y1="35" x2="189" y2="35" stroke="#1a8a8a" stroke-width="1.5" marker-end="url(#rh1)"/>
+            <rect x="190" y="8" width="150" height="56" rx="6" fill="#1a8a8a" stroke="#0d5f5f" stroke-width="2"/>
+            <text x="265" y="26" text-anchor="middle" font-size="11" fill="white" font-weight="bold" font-family="system-ui,sans-serif">React Hub</text>
+            <rect x="195" y="30" width="30" height="28" rx="3" fill="rgba(255,255,255,0.18)"/>
+            <text x="210" y="48" text-anchor="middle" font-size="8" fill="white" font-family="system-ui,sans-serif">Intake</text>
+            <rect x="229" y="30" width="36" height="28" rx="3" fill="rgba(255,255,255,0.18)"/>
+            <text x="247" y="48" text-anchor="middle" font-size="8" fill="white" font-family="system-ui,sans-serif">Pipeline</text>
+            <rect x="269" y="30" width="32" height="28" rx="3" fill="rgba(255,255,255,0.18)"/>
+            <text x="285" y="48" text-anchor="middle" font-size="8" fill="white" font-family="system-ui,sans-serif">Resume</text>
+            <rect x="305" y="30" width="30" height="28" rx="3" fill="rgba(255,255,255,0.18)"/>
+            <text x="320" y="48" text-anchor="middle" font-size="8" fill="white" font-family="system-ui,sans-serif">Chat</text>
+            <line x1="340" y1="35" x2="351" y2="35" stroke="#1a8a8a" stroke-width="1.5" marker-end="url(#rh1)"/>
+            <rect x="352" y="22" width="80" height="26" rx="5" fill="#e8f5f5" stroke="#1a8a8a" stroke-width="1.5"/>
+            <text x="392" y="38" text-anchor="middle" font-size="10" fill="#0d5f5f" font-family="system-ui,sans-serif">Anthropic API</text>
+          </svg>
+        </div>
+        <div class="before-after">
+          <span class="ba-before">Hours of manual prep &amp; review</span>
+          <span class="ba-arrow">→</span>
+          <span class="ba-after">Minutes, per-role memory</span>
+        </div>
+        <div class="sys-chips">
+          <span class="chip">React</span><span class="chip">n8n</span><span class="chip">Anthropic API</span><span class="chip">LLM Gateway</span><span class="chip">No ATS API needed</span>
+        </div>
+      </div>
+
+      <div class="sys-card amber">
+        <div class="sys-name">Workbase Assessment Hub</div>
+        <div class="sys-desc">End-to-end work trial automation — replaced a 15-20 min manual email chain with a 5-minute AI-scored, HM-notified pipeline.</div>
+        <div class="svg-wrap">
+          <svg viewBox="0 0 395 102" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="wa1" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0,0 6,3 0,6" fill="#d69e2e"/></marker></defs>
+            <rect x="4" y="10" width="52" height="24" rx="4" fill="#fffbeb" stroke="#d69e2e" stroke-width="1.5"/>
+            <text x="30" y="26" text-anchor="middle" font-size="9" fill="#7b5f1a" font-family="system-ui,sans-serif">Candidate</text>
+            <line x1="56" y1="22" x2="64" y2="22" stroke="#d69e2e" stroke-width="1.5" marker-end="url(#wa1)"/>
+            <rect x="65" y="10" width="52" height="24" rx="4" fill="#fffbeb" stroke="#d69e2e" stroke-width="1.5"/>
+            <text x="91" y="26" text-anchor="middle" font-size="9" fill="#7b5f1a" font-family="system-ui,sans-serif">G. Form</text>
+            <line x1="117" y1="22" x2="125" y2="22" stroke="#d69e2e" stroke-width="1.5" marker-end="url(#wa1)"/>
+            <rect x="126" y="10" width="50" height="24" rx="4" fill="#fffbeb" stroke="#d69e2e" stroke-width="1.5"/>
+            <text x="151" y="26" text-anchor="middle" font-size="9" fill="#7b5f1a" font-family="system-ui,sans-serif">Sheets</text>
+            <line x1="176" y1="22" x2="184" y2="22" stroke="#d69e2e" stroke-width="1.5" marker-end="url(#wa1)"/>
+            <rect x="185" y="10" width="44" height="24" rx="4" fill="#fffbeb" stroke="#d69e2e" stroke-width="1.5"/>
+            <text x="207" y="26" text-anchor="middle" font-size="9" fill="#7b5f1a" font-family="system-ui,sans-serif">n8n</text>
+            <line x1="229" y1="22" x2="237" y2="22" stroke="#d69e2e" stroke-width="1.5" marker-end="url(#wa1)"/>
+            <rect x="238" y="10" width="62" height="24" rx="4" fill="#fffbeb" stroke="#d69e2e" stroke-width="1.5"/>
+            <text x="269" y="26" text-anchor="middle" font-size="9" fill="#7b5f1a" font-family="system-ui,sans-serif">LLM Score</text>
+            <line x1="300" y1="22" x2="308" y2="22" stroke="#d69e2e" stroke-width="1.5" marker-end="url(#wa1)"/>
+            <rect x="309" y="6" width="74" height="32" rx="5" fill="#d69e2e" stroke="#b7791f" stroke-width="2"/>
+            <text x="346" y="24" text-anchor="middle" font-size="10" fill="white" font-weight="bold" font-family="system-ui,sans-serif">Hub</text>
+            <text x="346" y="34" text-anchor="middle" font-size="8" fill="rgba(255,255,255,0.85)" font-family="system-ui,sans-serif">Dashboard</text>
+            <line x1="346" y1="38" x2="346" y2="56" stroke="#d69e2e" stroke-width="1.5"/>
+            <line x1="220" y1="56" x2="346" y2="56" stroke="#d69e2e" stroke-width="1.5"/>
+            <line x1="220" y1="56" x2="220" y2="68" stroke="#d69e2e" stroke-width="1.5" marker-end="url(#wa1)"/>
+            <line x1="346" y1="56" x2="346" y2="68" stroke="#d69e2e" stroke-width="1.5" marker-end="url(#wa1)"/>
+            <rect x="162" y="68" width="116" height="26" rx="5" fill="#fffbeb" stroke="#d69e2e" stroke-width="1.5"/>
+            <text x="220" y="85" text-anchor="middle" font-size="9" fill="#7b5f1a" font-family="system-ui,sans-serif">Slack → HM (~5min)</text>
+            <rect x="295" y="68" width="96" height="26" rx="5" fill="#fffbeb" stroke="#d69e2e" stroke-width="1.5"/>
+            <text x="343" y="85" text-anchor="middle" font-size="9" fill="#7b5f1a" font-family="system-ui,sans-serif">GH Scorecard</text>
+          </svg>
+        </div>
+        <div class="before-after">
+          <span class="ba-before">15–20 min/candidate, email chain</span>
+          <span class="ba-arrow">→</span>
+          <span class="ba-after">~5 min, HM notified automatically</span>
+        </div>
+        <div class="sys-chips">
+          <span class="chip">React</span><span class="chip">n8n</span><span class="chip">Google Forms</span><span class="chip">Slack MCP</span><span class="chip">LLM scoring</span>
+        </div>
+      </div>
+
+      <div class="sys-card purple">
+        <div class="sys-name">End-of-Week Reporting Agent</div>
+        <div class="sys-desc">Scheduled sub-agent that pulls pipeline data, highlights standout candidates, and posts a formatted VP-level update to Slack — fully automated.</div>
+        <div class="svg-wrap">
+          <svg viewBox="0 0 420 62" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="ra1" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0,0 6,3 0,6" fill="#805ad5"/></marker></defs>
+            <rect x="4" y="18" width="74" height="26" rx="5" fill="#faf5ff" stroke="#805ad5" stroke-width="1.5"/>
+            <text x="41" y="34" text-anchor="middle" font-size="9.5" fill="#44337a" font-family="system-ui,sans-serif">⏰ Schedule</text>
+            <line x1="78" y1="31" x2="89" y2="31" stroke="#805ad5" stroke-width="1.5" marker-end="url(#ra1)"/>
+            <rect x="90" y="18" width="70" height="26" rx="5" fill="#faf5ff" stroke="#805ad5" stroke-width="1.5"/>
+            <text x="125" y="34" text-anchor="middle" font-size="9.5" fill="#44337a" font-family="system-ui,sans-serif">Sub-Agent</text>
+            <line x1="160" y1="31" x2="171" y2="31" stroke="#805ad5" stroke-width="1.5" marker-end="url(#ra1)"/>
+            <rect x="172" y="18" width="74" height="26" rx="5" fill="#faf5ff" stroke="#805ad5" stroke-width="1.5"/>
+            <text x="209" y="34" text-anchor="middle" font-size="9.5" fill="#44337a" font-family="system-ui,sans-serif">GH + Gem</text>
+            <line x1="246" y1="31" x2="257" y2="31" stroke="#805ad5" stroke-width="1.5" marker-end="url(#ra1)"/>
+            <rect x="258" y="18" width="76" height="26" rx="5" fill="#faf5ff" stroke="#805ad5" stroke-width="1.5"/>
+            <text x="296" y="34" text-anchor="middle" font-size="9.5" fill="#44337a" font-family="system-ui,sans-serif">Aggregate</text>
+            <line x1="334" y1="31" x2="345" y2="31" stroke="#805ad5" stroke-width="1.5" marker-end="url(#ra1)"/>
+            <rect x="346" y="10" width="70" height="42" rx="5" fill="#805ad5" stroke="#553c9a" stroke-width="2"/>
+            <text x="381" y="30" text-anchor="middle" font-size="10" fill="white" font-weight="bold" font-family="system-ui,sans-serif">Slack</text>
+            <text x="381" y="44" text-anchor="middle" font-size="8.5" fill="rgba(255,255,255,0.85)" font-family="system-ui,sans-serif">VP Channel</text>
+          </svg>
+        </div>
+        <div class="before-after">
+          <span class="ba-before">Manual weekly build, 30-45 min</span>
+          <span class="ba-arrow">→</span>
+          <span class="ba-after">Automated, VP always current</span>
+        </div>
+        <div class="sys-chips">
+          <span class="chip">Claude Code agents</span><span class="chip">n8n</span><span class="chip">Slack MCP</span><span class="chip">Google Sheets MCP</span>
+        </div>
+      </div>
+
+      <div class="sys-card blue">
+        <div class="sys-name">Jarvis — Personal Recruiter Assistant</div>
+        <div class="sys-desc">Chained agents in LibreChat providing a single natural-language interface across personal tasks, recruiting workflows, and n8n trigger orchestration.</div>
+        <div class="svg-wrap">
+          <svg viewBox="0 0 380 80" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="jv1" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0,0 6,3 0,6" fill="#3182ce"/></marker></defs>
+            <rect x="4" y="28" width="54" height="24" rx="5" fill="#ebf8ff" stroke="#3182ce" stroke-width="1.5"/>
+            <text x="31" y="44" text-anchor="middle" font-size="10" fill="#1a365d" font-family="system-ui,sans-serif">Chat</text>
+            <line x1="58" y1="40" x2="69" y2="40" stroke="#3182ce" stroke-width="1.5" marker-end="url(#jv1)"/>
+            <rect x="70" y="28" width="76" height="24" rx="5" fill="#ebf8ff" stroke="#3182ce" stroke-width="1.5"/>
+            <text x="108" y="44" text-anchor="middle" font-size="10" fill="#1a365d" font-family="system-ui,sans-serif">LibreChat</text>
+            <line x1="146" y1="40" x2="157" y2="40" stroke="#3182ce" stroke-width="1.5" marker-end="url(#jv1)"/>
+            <rect x="158" y="18" width="100" height="44" rx="5" fill="#3182ce" stroke="#1a4e8a" stroke-width="2"/>
+            <text x="208" y="43" text-anchor="middle" font-size="11" fill="white" font-weight="bold" font-family="system-ui,sans-serif">Claude Agents</text>
+            <line x1="258" y1="40" x2="270" y2="40" stroke="#3182ce" stroke-width="1.5"/>
+            <line x1="270" y1="12" x2="270" y2="68" stroke="#3182ce" stroke-width="1.5"/>
+            <line x1="270" y1="12" x2="280" y2="12" stroke="#3182ce" stroke-width="1.5" marker-end="url(#jv1)"/>
+            <rect x="281" y="4" width="94" height="20" rx="4" fill="#ebf8ff" stroke="#3182ce" stroke-width="1.5"/>
+            <text x="328" y="18" text-anchor="middle" font-size="9" fill="#1a365d" font-family="system-ui,sans-serif">Personal Asst.</text>
+            <line x1="270" y1="40" x2="280" y2="40" stroke="#3182ce" stroke-width="1.5" marker-end="url(#jv1)"/>
+            <rect x="281" y="30" width="94" height="20" rx="4" fill="#ebf8ff" stroke="#3182ce" stroke-width="1.5"/>
+            <text x="328" y="44" text-anchor="middle" font-size="9" fill="#1a365d" font-family="system-ui,sans-serif">Recruiter Asst.</text>
+            <line x1="270" y1="68" x2="280" y2="68" stroke="#3182ce" stroke-width="1.5" marker-end="url(#jv1)"/>
+            <rect x="281" y="58" width="94" height="20" rx="4" fill="#ebf8ff" stroke="#3182ce" stroke-width="1.5"/>
+            <text x="328" y="72" text-anchor="middle" font-size="9" fill="#1a365d" font-family="system-ui,sans-serif">n8n Trigger</text>
+          </svg>
+        </div>
+        <div class="before-after">
+          <span class="ba-before">Context switching across tools</span>
+          <span class="ba-arrow">→</span>
+          <span class="ba-after">One interface for everything</span>
+        </div>
+        <div class="sys-chips">
+          <span class="chip">LibreChat</span><span class="chip">Claude Code</span><span class="chip">n8n</span><span class="chip">Slack MCP</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- TRACK RECORD -->
+<div class="section section-alt" id="track-record">
+  <div class="section-inner">
+    <div class="eyebrow">By the numbers</div>
+    <div class="section-title">Track Record</div>
+    <div class="metrics-grid">
+      <div class="metric-chart-area" id="metrics-charts">
+        <div class="metric-row">
+          <div class="metric-row-label">
+            <span class="mlabel">Hires / year (avg vs. 30 benchmark)</span>
+            <span class="mvalue">45</span>
+          </div>
+          <div class="bar-track">
+            <div class="bar-fill-anim teal" data-width="75" style="width:0%"></div>
+          </div>
+          <div class="bar-benchmark"><span>0</span><span>benchmark: 30</span><span>60</span></div>
+        </div>
+        <div class="metric-row">
+          <div class="metric-row-label">
+            <span class="mlabel">Offer acceptance rate</span>
+            <span class="mvalue">87%</span>
+          </div>
+          <div class="bar-track">
+            <div class="bar-fill-anim green" data-width="87" style="width:0%"></div>
+          </div>
+          <div class="bar-benchmark"><span>0%</span><span></span><span>100%</span></div>
+        </div>
+        <div class="metric-row">
+          <div class="metric-row-label">
+            <span class="mlabel">Proactively sourced (not inbound)</span>
+            <span class="mvalue">55%</span>
+          </div>
+          <div class="bar-track">
+            <div class="bar-fill-anim purple" data-width="55" style="width:0%"></div>
+          </div>
+          <div class="bar-benchmark"><span>0%</span><span></span><span>100%</span></div>
+        </div>
+        <div class="metric-row">
+          <div class="metric-row-label">
+            <span class="mlabel">COO / ET-1 offer approval rate</span>
+            <span class="mvalue">100%</span>
+          </div>
+          <div class="bar-track">
+            <div class="bar-fill-anim amber" data-width="100" style="width:0%"></div>
+          </div>
+          <div class="bar-benchmark"><span>0%</span><span>70+ offers</span><span>100%</span></div>
+        </div>
+      </div>
+      <div class="metrics-context">
+        <h3>What these numbers mean</h3>
+        <p><strong>45 hires/year</strong> against a benchmark of 30 isn't just volume — it's volume with a 55% proactive source rate, meaning more than half of every hire came from targeted outreach, not applications. That's a different and harder kind of recruiting.</p>
+        <p><strong>100% at COO/ET-1 review</strong> means every executive-level candidate write-up I authored was approved at the final stage. These write-ups synthesized talent market density, work trial performance, AI fluency, and panel conviction — a format I developed and owned end-to-end.</p>
+        <p>The <strong>87% offer acceptance</strong> rate was maintained in part by tracking offer loss patterns systematically and partnering with Comp to expand pay bands on roles where comp was a recurring close blocker.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROGRAMS -->
+<div class="section" id="programs">
+  <div class="section-inner">
+    <div class="eyebrow">Amazon · 2017–2023</div>
+    <div class="section-title">Programs &amp; Impact</div>
+    <div class="section-sub">Six years building and redesigning how Amazon's technical recruiting and talent operations functioned — from IC to Senior Manager leading 100+ reports.</div>
+    <div class="programs-grid">
+      <div class="prog-card">
+        <h3>Bar Raiser Debrief-Only Experiment</h3>
+        <div class="prog-role">Sr. Recruiting Manager · Global Media Ads &amp; Entertainment</div>
+        <div class="prog-desc">Redesigned the Bar Raiser role to attend debrief only — not the full loop — reducing time burden while improving decision quality and reducing bias.</div>
+        <span class="prog-pill">4,000+ BR hours saved</span><span class="prog-pill">−7 days SDE L5 process</span>
+      </div>
+      <div class="prog-card">
+        <h3>iTAP — Interviewer Training &amp; Analytics</h3>
+        <div class="prog-role">Sr. Recruiting Manager · Global Media Ads &amp; Entertainment</div>
+        <div class="prog-desc">Standardized interviewer training across a 10k+ employee org with analytics to track coverage gaps and ensure quality.</div>
+        <span class="prog-pill">+36% trained interviewers</span>
+      </div>
+      <div class="prog-card">
+        <h3>Two-Week Promise</h3>
+        <div class="prog-role">Recruiting Manager · Talent Ops</div>
+        <div class="prog-desc">2-week SLA from interview to offer for technical candidates. Required a full redesign of scheduling ops, debrief timing, and approval workflows.</div>
+        <span class="prog-pill">−14 days interview timeline</span>
+      </div>
+      <div class="prog-card">
+        <h3>Twitch M&amp;A Integration</h3>
+        <div class="prog-role">Recruiting Manager · Talent Ops</div>
+        <div class="prog-desc">Global integration of the Twitch Ads acquisition into Amazon hiring practices — 2,000 employees onboarded across process, tooling, and enablement.</div>
+        <span class="prog-pill">2,000 employees</span><span class="prog-pill">Global rollout</span>
+      </div>
+      <div class="prog-card">
+        <h3>Staff &amp; Principal Engineering Scale</h3>
+        <div class="prog-role">Lead Technical Recruiter</div>
+        <div class="prog-desc">Targeted sourcing + internal mobility scaled the Staff/Principal Engineering team from 3 to 18 within one year.</div>
+        <span class="prog-pill">3 → 18 in 12 months</span>
+      </div>
+      <div class="prog-card">
+        <h3>NAMER Fungible Hiring Model</h3>
+        <div class="prog-role">Technical Recruiter</div>
+        <div class="prog-desc">Transitioned NAMER SDE hiring to a fungible model — candidates evaluated across roles — doubling interviewing capacity and throughput.</div>
+        <span class="prog-pill">2× interviewing capacity</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CAREER -->
+<div class="section section-alt" id="career">
+  <div class="section-inner">
+    <div class="eyebrow">2016 – Present</div>
+    <div class="section-title">Career</div>
+    <div class="career-timeline">
+
+      <div class="ct-item">
+        <div class="ct-meta"><div class="ct-years">Feb 2024–<br>Now</div><div class="ct-co">Coinbase</div></div>
+        <div class="ct-spine"><div class="ct-dot coinbase now"></div><div class="ct-line"></div></div>
+        <div class="ct-body">
+          <div class="ct-role">Senior Recruiter</div>
+          <ul class="ct-points">
+            <li>9+ concurrent searches: quant risk, fraud/ML, FP&A, data science, IT audit, BizDev, product</li>
+            <li>Built Platform Model Risk function from scratch — M7 SM + 6 senior ICs</li>
+            <li>COO/ET-1 write-ups; 70+ offers approved at 100% approval rate</li>
+            <li>Built full automation stack: Recruiter Hub, Workbase Assessment Hub, reporting agents, Jarvis</li>
+          </ul>
+          <div class="ct-tags"><span class="ct-tag blue">45 hires/yr</span><span class="ct-tag blue">AI-Automated</span><span class="ct-tag blue">COO-level</span></div>
+        </div>
+      </div>
+
+      <div class="ct-item">
+        <div class="ct-meta"><div class="ct-years">May 2022–<br>Jun 2023</div><div class="ct-co">Amazon</div></div>
+        <div class="ct-spine"><div class="ct-dot amazon"></div><div class="ct-line"></div></div>
+        <div class="ct-body">
+          <div class="ct-role">Sr. Recruiting Manager, Talent Ops — Global Media Ads &amp; Entertainment</div>
+          <ul class="ct-points">
+            <li>8 direct manager reports; 50–100 total reports; MBR/QBR to SVP</li>
+            <li>iTAP: +36% trained interviewers · BR Debrief-Only: 4,000+ hrs saved</li>
+          </ul>
+          <div class="ct-tags"><span class="ct-tag orange">Sr. Manager</span><span class="ct-tag orange">100+ reports</span></div>
+        </div>
+      </div>
+
+      <div class="ct-item">
+        <div class="ct-meta"><div class="ct-years">Aug 2020–<br>Apr 2022</div><div class="ct-co">Amazon</div></div>
+        <div class="ct-spine"><div class="ct-dot amazon"></div><div class="ct-line"></div></div>
+        <div class="ct-body">
+          <div class="ct-role">Recruiting Manager, Talent Ops</div>
+          <ul class="ct-points">
+            <li>Twitch M&A integration — 2,000 employees onboarded globally</li>
+            <li>Two-Week Promise — SDE interview timeline reduced by 14+ days</li>
+          </ul>
+          <div class="ct-tags"><span class="ct-tag orange">Manager</span><span class="ct-tag orange">M&amp;A Integration</span></div>
+        </div>
+      </div>
+
+      <div class="ct-item">
+        <div class="ct-meta"><div class="ct-years">Jan 2018–<br>Jul 2020</div><div class="ct-co">Amazon</div></div>
+        <div class="ct-spine"><div class="ct-dot amazon"></div><div class="ct-line"></div></div>
+        <div class="ct-body">
+          <div class="ct-role">Lead Technical Recruiter</div>
+          <ul class="ct-points">
+            <li>Scaled Staff &amp; Principal Engineering team: 3 → 18 in one year</li>
+            <li>Promoted L4 → L5</li>
+          </ul>
+          <div class="ct-tags"><span class="ct-tag orange">Lead</span><span class="ct-tag orange">3→18 in 1yr</span></div>
+        </div>
+      </div>
+
+      <div class="ct-item">
+        <div class="ct-meta"><div class="ct-years">Jul 2016–<br>Dec 2017</div><div class="ct-co">Amazon</div></div>
+        <div class="ct-spine"><div class="ct-dot amazon"></div></div>
+        <div class="ct-body">
+          <div class="ct-role">Technical Recruiter → Intern</div>
+          <ul class="ct-points">
+            <li>Mid-to-senior SDE pipelines; 6.5 offers/mo vs. benchmark of 3</li>
+            <li>NAMER fungible hiring model — doubled interviewing capacity</li>
+          </ul>
+          <div class="ct-tags"><span class="ct-tag orange">IC</span><span class="ct-tag orange">2× benchmark</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- STACK -->
+<div class="section" id="stack">
+  <div class="section-inner">
+    <div class="eyebrow">Tools &amp; Systems</div>
+    <div class="section-title">Stack</div>
+    <div class="stack-groups">
+      <div>
+        <h3>AI &amp; Automation</h3>
+        <div class="stack-pills">
+          <span class="stack-pill teal">Claude Code</span>
+          <span class="stack-pill teal">n8n</span>
+          <span class="stack-pill teal">Anthropic API</span>
+          <span class="stack-pill teal">LibreChat</span>
+          <span class="stack-pill teal">LLM Gateway</span>
+          <span class="stack-pill teal">ChatGPT</span>
+        </div>
+      </div>
+      <div>
+        <h3>Development</h3>
+        <div class="stack-pills">
+          <span class="stack-pill purple">React</span>
+          <span class="stack-pill purple">JavaScript</span>
+          <span class="stack-pill purple">Google Apps Script</span>
+          <span class="stack-pill purple">Slack MCP</span>
+          <span class="stack-pill purple">Webhooks</span>
+        </div>
+      </div>
+      <div>
+        <h3>Recruiting Systems</h3>
+        <div class="stack-pills">
+          <span class="stack-pill blue">Greenhouse</span>
+          <span class="stack-pill blue">Gem</span>
+          <span class="stack-pill blue">LinkedIn Recruiter</span>
+          <span class="stack-pill blue">iCIMS</span>
+          <span class="stack-pill blue">Beamery</span>
+          <span class="stack-pill blue">Workday</span>
+        </div>
+      </div>
+      <div>
+        <h3>Analytics &amp; Reporting</h3>
+        <div class="stack-pills">
+          <span class="stack-pill amber">Tableau</span>
+          <span class="stack-pill amber">QuickSight</span>
+          <span class="stack-pill amber">Snowflake</span>
+          <span class="stack-pill amber">Looker</span>
+          <span class="stack-pill amber">Google Sheets</span>
+          <span class="stack-pill amber">Excel</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CURRENTLY BUILDING -->
+<div class="section section-alt" id="building">
+  <div class="section-inner">
+    <div class="eyebrow">In progress</div>
+    <div class="section-title">Currently Building</div>
+    <div class="section-sub">Rebuilding the systems from Coinbase as open-source tools — recruiting infrastructure that any team can use.</div>
+    <div class="building-grid">
+      <div class="build-card">
+        <div class="build-name">Recruiter Hub</div>
+        <div class="build-desc">Open-source React app: JD intake → template generation, live pipeline reporting via webhook, AI resume stack-ranking with HM calibration memory.</div>
+        <div class="build-stack">
+          <span class="build-chip">React</span><span class="build-chip">n8n</span><span class="build-chip">Anthropic API</span>
+        </div>
+        <div class="build-status">🔨 Rebuilding — GitHub soon</div>
+      </div>
+      <div class="build-card amber">
+        <div class="build-name">Workbase Assessment Hub</div>
+        <div class="build-desc">End-to-end work trial pipeline: Google Form → LLM scoring → HM Slack notification → ATS scorecard. Replaces CodePad or manual email chains.</div>
+        <div class="build-stack">
+          <span class="build-chip">n8n</span><span class="build-chip">Google Forms</span><span class="build-chip">Slack MCP</span>
+        </div>
+        <div class="build-status" style="color:var(--amber)">🔨 Rebuilding — GitHub soon</div>
+      </div>
+      <div class="build-card purple">
+        <div class="build-name">Recruiting Reporting Agent</div>
+        <div class="build-desc">Scheduled Claude Code agent that pulls ATS pipeline + Gem data and posts a formatted VP-ready weekly update to Slack. Zero manual effort.</div>
+        <div class="build-stack">
+          <span class="build-chip">Claude Code</span><span class="build-chip">n8n</span><span class="build-chip">Slack MCP</span>
+        </div>
+        <div class="build-status" style="color:var(--purple)">🔨 Rebuilding — GitHub soon</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="f-name">Dylan Heyne</div>
+  <div style="font-size:0.85rem;color:#64748b;margin-top:0.25rem">Senior Recruiter &amp; Recruiting Automation Builder · Seattle, WA (Remote-first)</div>
+  <div class="f-links">
+    <a href="mailto:dylan.d.heyne@gmail.com">dylan.d.heyne@gmail.com</a>
+    <a href="https://linkedin.com/in/dylanheyne" target="_blank">LinkedIn</a>
+    <a href="https://github.com/dylanheyne" target="_blank">GitHub</a>
+  </div>
+  <p>Open to Senior Recruiter, TA Lead/Manager, Head of Recruiting, and People Partner roles · AI-first companies · Remote or Seattle</p>
+</footer>
+
+<script>
+  // Animated counters
+  function animateCounter(el) {
+    const target = parseInt(el.dataset.target);
+    const suffix = el.dataset.suffix || '';
+    const duration = 1600;
+    const start = Date.now();
+    const tick = () => {
+      const p = Math.min((Date.now() - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * ease).toLocaleString() + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  // Animated metric bars
+  function animateBars() {
+    document.querySelectorAll('.bar-fill-anim').forEach(bar => {
+      bar.style.width = bar.dataset.width + '%';
+    });
+  }
+
+  // IntersectionObserver for both
+  const counterObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        animateCounter(e.target);
+        counterObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  const barObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        animateBars();
+        barObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('.counter').forEach(el => counterObs.observe(el));
+  const chartsEl = document.getElementById('metrics-charts');
+  if (chartsEl) barObs.observe(chartsEl);
+</script>
+</body>
+</html>
